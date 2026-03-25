@@ -36,7 +36,7 @@ Stack<T, N>::Stack() : top(-1)
 template <typename T, std::size_t N>
 StackStatus Stack<T, N>::push(const T &item)
 {
-    if (top >= N - 1)
+    if (top >= int(N - 1))
         return STACK_FULL;
     
     buffer[++top] = item;
