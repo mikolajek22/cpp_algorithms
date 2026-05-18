@@ -27,7 +27,7 @@ class LL_Stack
         LL_StackStatus isFull();
         LL_StackStatus isEmpty();
     private:
-        Node *top;
+        Node<T> *top;
 
 };
 
@@ -40,7 +40,7 @@ LL_Stack<T>::LL_Stack() : top(nullptr)
 template<typename T>
 LL_StackStatus LL_Stack<T>::push(T &item)
 {
-    Node *n = new Node;
+    Node<T> *n = new Node<T>;
     if (n == nullptr)
         return LL_STACK_FULL;
     
@@ -56,7 +56,7 @@ LL_StackStatus LL_Stack<T>::pop(T &item)
     if (top == nullptr)
         return LL_STACK_EMPTY;
 
-    Node *p;
+    Node<T> *p;
     item = top->value;
     p = top;
     top = top->next;
@@ -68,7 +68,7 @@ LL_StackStatus LL_Stack<T>::pop(T &item)
 template<typename T>
 LL_StackStatus LL_Stack<T>::peek(T &item, int idx)
 {
-    Node *p = top;
+    Node<T> *p = top;
     for (int i = 0; (p != nullptr) && (i < idx - 1); i++)
     {
         p = p->next;
@@ -83,7 +83,7 @@ LL_StackStatus LL_Stack<T>::peek(T &item, int idx)
 template<typename T>
 LL_StackStatus LL_Stack<T>::isFull()
 {
-    Node *p = new Node();
+    Node<T> *p = new Node<T>();
     if (!p)
     {
         return LL_STACK_FULL;

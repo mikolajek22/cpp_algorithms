@@ -11,14 +11,14 @@ enum StackStatus
     STACK_OUT_OF_RANGE = 12,
 };
 
-template <typename T, std::size_t N>
+template <typename T, int N>
 class Stack
 {
     public:
         Stack();
         StackStatus push(const T &item);
         StackStatus pop(T &item);
-        StackStatus peek(T &item, size_t idx);
+        StackStatus peek(T &item, int idx);
         StackStatus isFull();
         StackStatus isEmpty();
         int count();
@@ -27,13 +27,13 @@ class Stack
         T buffer[N];
 
 };
-template <typename T, std::size_t N>
+template <typename T, int N>
 Stack<T, N>::Stack() : top(-1)
 {
 
 }
 
-template <typename T, std::size_t N>
+template <typename T, int N>
 StackStatus Stack<T, N>::push(const T &item)
 {
     if (top >= int(N - 1))
@@ -43,7 +43,7 @@ StackStatus Stack<T, N>::push(const T &item)
     return STACK_OK;
 }
 
-template <typename T, std::size_t N>
+template <typename T, int N>
 StackStatus Stack<T, N>::pop(T &item)
 {
     if (top < 0)
@@ -53,8 +53,8 @@ StackStatus Stack<T, N>::pop(T &item)
     return STACK_OK;
 }
 
-template <typename T, std::size_t N>
-StackStatus Stack<T, N>::peek(T &item, size_t idx)
+template <typename T, int N>
+StackStatus Stack<T, N>::peek(T &item, int idx)
 {
     if (top - idx <= -1)
         return STACK_OUT_OF_RANGE;
@@ -63,7 +63,7 @@ StackStatus Stack<T, N>::peek(T &item, size_t idx)
     return STACK_OK;
 }
 
-template <typename T, std::size_t N>
+template <typename T, int N>
 StackStatus Stack<T, N>::isFull()
 {
     if (top >= N - 1)
@@ -72,7 +72,7 @@ StackStatus Stack<T, N>::isFull()
         return STACK_OK;
 }
 
-template <typename T, std::size_t N>
+template <typename T, int N>
 StackStatus Stack<T, N>::isEmpty()
 {
     if (top < 0)
@@ -81,7 +81,7 @@ StackStatus Stack<T, N>::isEmpty()
         return STACK_OK;
 }
 
-template <typename T, std::size_t N>
+template <typename T, int N>
 int Stack<T, N>::count()
 {
     return top + 1;

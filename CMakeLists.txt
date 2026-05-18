@@ -12,6 +12,7 @@ add_library(algorithms INTERFACE)
 target_include_directories(algorithms INTERFACE
                             ${CMAKE_CURRENT_SOURCE_DIR}/queue
                             ${CMAKE_CURRENT_SOURCE_DIR}/stack
+                            ${CMAKE_CURRENT_SOURCE_DIR}/tree
 )
 
 target_compile_features(algorithms INTERFACE cxx_std_20)
