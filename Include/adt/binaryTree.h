@@ -1,11 +1,8 @@
-#include "queue.h"
+#pragma once
+#include "ring_queue.h"
 #include <cstddef>
 #include <array>
 #include <optional>
-#pragma once
-
-
-using namespace std;
 
 
 namespace tree
@@ -23,7 +20,6 @@ namespace tree
     class BinaryTree
     {
         public:
-            Node<T> *root;
             BinaryTree();
             ~BinaryTree();
             template <size_t N> 
@@ -35,8 +31,8 @@ namespace tree
             void Height(Node<T> *root);
 
         private:
+            Node<T> *root;
             void destroy(Node<T> *node);
-
             void preOrderHelper(Node<T> *node, std::vector<T> &v);
             void postOrderHelper(Node<T> *node, std::vector<T> &v);
             void inOrderHelper(Node<T> *node, std::vector<T> &v);
@@ -48,7 +44,7 @@ namespace tree
     template <typename T>
     BinaryTree<T>::~BinaryTree()
     {
-        destroy();
+        destroy(root);
     }
 
     template <typename T>
@@ -86,7 +82,7 @@ namespace tree
         // store root node address
         q.enqueue(root);
 
-        while(q.isEmpty() != QUEUE_EMPTY && idx < N)
+        while(!q.isEmpty() && idx < N)
         {
             // get node (parent)
             q.dequeue(p);
@@ -138,8 +134,8 @@ namespace tree
     {
         if (!node) return;
         v.push_back(node->value);
-        preOrderHelper(node->lChild);
-        preOrderHelper(node->rChild);
+        preOrderHelper(node->lChild, v);
+        preOrderHelper(node->rChild, v);
 
     }
 
@@ -156,8 +152,8 @@ namespace tree
     {
         if (!node) return;
         
-        preOrderHelper(node->lChild);
-        preOrderHelper(node->rChild);
+        postOrderHelper(node->lChild, v);
+        postOrderHelper(node->rChild, v);
         v.push_back(node->value);
 
     }
@@ -175,11 +171,9 @@ namespace tree
     {
         if (!node) return;
         
-        preOrderHelper(node->lChild);
+        inOrderHelper(node->lChild, v);
         v.push_back(node->value);
-        preOrderHelper(node->rChild);
-        
-
+        inOrderHelper(node->rChild, v);
     }
 }
 
