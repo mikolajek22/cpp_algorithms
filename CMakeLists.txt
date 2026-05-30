@@ -11,6 +11,7 @@ add_executable(stack_test
   Tests/adt/stack_test.cpp
   Tests/adt/ll_stack_test.cpp
   Tests/adt/queue_test.cpp
+  Tests/adt/ring_queue_test.cpp
   )
 
 target_include_directories(stack_test PRIVATE Include)
