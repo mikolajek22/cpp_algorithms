@@ -7,16 +7,24 @@ enable_testing()
 
 find_package(GTest REQUIRED)
 
-add_executable(stack_test
+add_executable(adt_test
   Tests/adt/stack_test.cpp
   Tests/adt/ll_stack_test.cpp
   Tests/adt/queue_test.cpp
   Tests/adt/ring_queue_test.cpp
+  Tests/adt/binaryTree_test.cpp
   )
 
-target_include_directories(stack_test PRIVATE Include)
+add_executable(searching_test
+  Tests/searching/linearSearch_test.cpp
+)
 
-target_link_libraries(stack_test GTest::gtest_main)
+target_include_directories(adt_test PRIVATE Include)
+target_include_directories(searching_test PRIVATE Include)
+
+target_link_libraries(adt_test GTest::gtest_main)
+target_link_libraries(searching_test GTest::gtest_main)
 
 include(GoogleTest)
-gtest_discover_tests(stack_test)
+gtest_discover_tests(adt_test)
+gtest_discover_tests(searching_test)
