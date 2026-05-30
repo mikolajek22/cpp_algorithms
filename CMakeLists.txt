@@ -1,18 +1,19 @@
-cmake_minimum_required(VERSION 3.20)
+cmake_minimum_required(VERSION 3.14)
+project(CPP_ALGORITHMS)
 
-project(cpp_alghoritms)
+set(CMAKE_CXX_STANDARD 17)
 
-# add_library(algorithms
-#             queue/src/queue.cpp
-#             stack/src/stack.cpp
-# )
-add_library(algorithms INTERFACE)
+enable_testing()
 
+find_package(GTest REQUIRED)
 
-target_include_directories(algorithms INTERFACE
-                            ${CMAKE_CURRENT_SOURCE_DIR}/queue
-                            ${CMAKE_CURRENT_SOURCE_DIR}/stack
-                            ${CMAKE_CURRENT_SOURCE_DIR}/tree
+add_executable(stack_test
+  Tests/adt/stack_test.cpp
 )
 
-target_compile_features(algorithms INTERFACE cxx_std_20)
+target_include_directories(stack_test PRIVATE Include)
+
+target_link_libraries(stack_test GTest::gtest_main)
+
+include(GoogleTest)
+gtest_discover_tests(stack_test)
