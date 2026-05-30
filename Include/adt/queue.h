@@ -1,168 +1,75 @@
 #pragma once
 
-#include <stdexcept>
-#include <utility>
-
-using namespace std;
-
-enum QueueStatus
-{
-    QUEUE_OK,
-    QUEUE_EMPTY,
-    QUEUE_FULL,
+enum class QueueStatus {
+    QUEUE_OK = 0,
+    QUEUE_FULL = 1,
+    QUEUE_EMPTY = 2,
 };
 
-template <typename T>
-class Queue 
+template <typename T, size_t N>
+class Queue
 {
-
-    private:
-        int head;
-        int tail;
-        int size;
-        int count;
-        T *Q;
     public:
-        Queue(int size);
-        Queue(const Queue &other);
-        Queue(Queue &&other) noexcept;
-        ~Queue();
-
-        QueueStatus dequeue(T &value);
-        QueueStatus enqueue(const T &value);
-        QueueStatus enqueue(T &&value);
-        QueueStatus isEmpty() const;
-
-        Queue& operator=(Queue&& other) noexcept;
-        Queue& operator=(const Queue &other);
+        Queue();
+        QueueStatus push(const T &item);
+        QueueStatus pop(T &item);
+        bool isEmpty();
+        bool isFull();
+        QueueStatus flush();
+    private:
+        T q[N];
+        size_t tail;
+        size_t head;
+        size_t count;
 };
 
-template <typename T>
-Queue<T>& Queue<T>::operator=(const Queue& other)
+template <typename T, size_t N>
+Queue<T, N>::Queue() : head(0), tail(0), count(0)
 {
-    if (this != &other)
-    {
-        delete[] Q;
-        head = other.head;
-        tail = other.tail;
-        size = other.size;
-        count = other.count;
-        Q = new T[size];
-
-        for (int i = 0; i < size; i++)
-            Q[i] = other.Q[i];
-    }
     
-
-    return *this;
 }
 
-template <typename T>
-Queue<T>& Queue<T>::operator=(Queue&& other) noexcept
+template <typename T, size_t N>
+QueueStatus Queue<T, N>::push(const T &item)
 {
-    if (this != &other)
+    if (!isFull() && head < N)
     {
-        delete[] Q;
-
-        head = other.head;
-        tail = other.tail;
-        size = other.size;
-        count = other.count;
-        Q = other.Q;
-
-        other.Q = nullptr;
-        other.size = 0;
-        other.count = 0;
+        q[head++] = item;
+        count++;
+        return QueueStatus::QUEUE_OK;
     }
-    return *this;
+    return QueueStatus::QUEUE_FULL;
 }
-template <typename T>
-Queue<T>::Queue(const Queue &other) : head(other.head), tail(other.tail), count(other.count), size(other.size)
+
+template <typename T, size_t N>
+QueueStatus Queue<T, N>::pop(T &item)
 {
-    Q = new T[this->size];
-    for (int i = 0; i < other.size; i++)
+    if (!isEmpty() && tail < N)
     {
-        this->Q[i] = other.Q[i];
-    }
-}
-
-template <typename T>
-Queue<T>::Queue(int size) : head(0), tail(0), Q(nullptr), count(0)
-{
-    if (size <= 0)
-        throw invalid_argument("Queue size must be bigger than 0!");
-
-    this->size = size;
-    Q = new T[size];
-}
-
-template <typename T>
-Queue<T>::~Queue()
-{
-    delete[] Q;
-}
-template <typename T>
-Queue<T>::Queue(Queue &&other) noexcept 
-            : head(other.head), size(other.size), tail(other.tail), Q(other.Q), count(other.count)
-{
-    other.Q = nullptr;
-    other.size = 0;
-    other.count = 0;
-}
-
-template <typename T>
-QueueStatus Queue<T>::dequeue(T &value)
-{
-    if (count != 0)
-    {
-        value = Q[tail++];
-        tail = tail % size;
+        item = q[tail++];
         count--;
-        return QUEUE_OK;
+        return QueueStatus::QUEUE_OK;
     }
-    else
-    {
-        return QUEUE_EMPTY;
-    }
+    return QueueStatus::QUEUE_EMPTY;
 }
 
-template <typename T>
-QueueStatus Queue<T>::enqueue(const T &value)
+template <typename T, size_t N>
+bool Queue<T, N>::isEmpty()
 {
-
-    if (count != size)
-    {
-        Q[head++] = value;
-        head = head % size;
-        count++;
-        return QUEUE_OK;
-    }
-    else
-    {
-        return QUEUE_FULL;
-    }
-}
-
-template <typename T>
-QueueStatus Queue<T>::enqueue(T &&value)
-{
-
-    if (count != size)
-    {
-        Q[head++] = std::move(value);
-        head = head % size;
-        count++;
-        return QUEUE_OK;
-    }
-    else
-    {
-        return QUEUE_FULL;
-    }
+    return (count == 0);
 }
 
 
-template <typename T>
-QueueStatus Queue<T>::isEmpty() const
+template <typename T, size_t N>
+bool Queue<T, N>::isFull()
 {
-    return (count == 0) ? QUEUE_EMPTY : QUEUE_OK;
+    return (count == N);
+}
+
+template <typename T, size_t N>
+QueueStatus Queue<T, N>::flush()
+{
+    q={};
+    head = tail = count = 0;
+    return QueueStatus::QUEUE_OK;
 }
