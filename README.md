@@ -17,6 +17,9 @@
  
 ## Sorting Algorithms
 
+|Algorithm|avg time|worst time|best time|space|
+|:-------:|:-------:|:-------:|:-------:|:-------:|
+|Bubble Sort|O(n<sup>2</sup>)|O(n<sup>2</sup>)|O(n)|O(1)
 
 
 
