@@ -9,7 +9,8 @@ find_package(GTest REQUIRED)
 
 add_executable(stack_test
   Tests/adt/stack_test.cpp
-)
+  Tests/adt/ll_stack_test.cpp
+  )
 
 target_include_directories(stack_test PRIVATE Include)
 

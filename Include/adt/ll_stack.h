@@ -1,5 +1,6 @@
 #pragma once
 
+#include <new>
 
 enum LL_StackStatus
 {
@@ -20,12 +21,13 @@ template<typename T>
 class LL_Stack
 {
     public:
-    LL_Stack    ();
-        LL_StackStatus push(T &item);
+        LL_Stack();
+        ~LL_Stack();
+        LL_StackStatus push(const T &item);
         LL_StackStatus pop(T &item);
         LL_StackStatus peek(T &item, int idx);
-        LL_StackStatus isFull();
-        LL_StackStatus isEmpty();
+        bool isFull();
+        bool isEmpty();
     private:
         Node<T> *top;
 
@@ -38,9 +40,19 @@ LL_Stack<T>::LL_Stack() : top(nullptr)
 }
 
 template<typename T>
-LL_StackStatus LL_Stack<T>::push(T &item)
+LL_Stack<T>::~LL_Stack()
 {
-    Node<T> *n = new Node<T>;
+    T dummy;
+    while (!isEmpty())
+    {
+        pop(dummy);
+    }
+}
+
+template<typename T>
+LL_StackStatus LL_Stack<T>::push(const T &item)
+{
+    Node<T> *n = new(std::nothrow) Node<T>;
     if (n == nullptr)
         return LL_STACK_FULL;
     
@@ -69,33 +81,33 @@ template<typename T>
 LL_StackStatus LL_Stack<T>::peek(T &item, int idx)
 {
     Node<T> *p = top;
-    for (int i = 0; (p != nullptr) && (i < idx - 1); i++)
+    for (int i = 0; (p != nullptr) && (i < idx); i++)
     {
         p = p->next;
     }
 
-    if (p == nullptr)
+    if (idx < 0 || p == nullptr)
         return LL_STACK_OUT_OF_RANGE;
     item = p->value;
     return LL_STACK_OK;
 }
 
 template<typename T>
-LL_StackStatus LL_Stack<T>::isFull()
+bool LL_Stack<T>::isFull()
 {
-    Node<T> *p = new Node<T>();
+    Node<T> *p = new(std::nothrow) Node<T>();
     if (!p)
     {
-        return LL_STACK_FULL;
+        return true;
     }
     else {
         delete p;
-        return LL_STACK_OK;
+        return false;
     }
 }
 
 template<typename T>
-LL_StackStatus LL_Stack<T>::isEmpty()
+bool LL_Stack<T>::isEmpty()
 {
-    return (top == nullptr) ? LL_STACK_EMPTY : LL_STACK_OK;
+    return (top == nullptr);
 }
