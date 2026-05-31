@@ -17,6 +17,7 @@ add_executable(adt_test
 
 add_executable(searching_test
   Tests/searching/linearSearch_test.cpp
+  Tests/searching/binarySearch_test.cpp
 )
 
 add_executable(sorting_test
