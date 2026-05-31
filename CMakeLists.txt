@@ -24,6 +24,7 @@ add_executable(sorting_test
   Tests/sorting/selectionSort_test.cpp
   Tests/sorting/insertionSort_test.cpp
   Tests/sorting/mergeSort_test.cpp
+  Tests/sorting/timeComparement_test.cpp
 )
 
 target_include_directories(adt_test PRIVATE Include)
