@@ -21,6 +21,8 @@ add_executable(searching_test
 
 add_executable(sorting_test
   Tests/sorting/bubbleSort_test.cpp
+  Tests/sorting/selectionSort_test.cpp
+  Tests/sorting/insertionSort_test.cpp
 )
 
 target_include_directories(adt_test PRIVATE Include)

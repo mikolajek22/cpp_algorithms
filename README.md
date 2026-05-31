@@ -20,6 +20,8 @@
 |Algorithm|avg time|worst time|best time|space|
 |:-------:|:-------:|:-------:|:-------:|:-------:|
 |Bubble Sort|O(n<sup>2</sup>)|O(n<sup>2</sup>)|O(n)|O(1)
+|Selection Sort|O(n<sup>2</sup>)|O(n<sup>2</sup>)|O(n<sup>2</sup>)|O(1)
+|Bubble Sort|O(n<sup>2</sup>)|O(n<sup>2</sup>)|O(n)|O(1)
 
 
 
