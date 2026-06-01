@@ -10,6 +10,7 @@ colors = {
     "insertion": "orange",
     "selection": "blue",
     "merge":     "green",
+    "quick":     "pink",
 }
 
 fig, axes = plt.subplots(1, 2, figsize=(14, 6))
@@ -32,6 +33,9 @@ ax2 = axes[1]
 merge = df[df["algorithm"] == "merge"]
 ax2.plot(merge["n"], merge["time_us"],
          marker="o", color="green", label="merge")
+quick = df[df["algorithm"] == "quick"]
+ax2.plot(merge["n"], merge["time_us"],
+         marker="o", color="red", label="quick")
 
 # reference nlog(n)
 x = np.array(merge["n"])

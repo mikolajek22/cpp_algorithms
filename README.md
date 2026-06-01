@@ -23,6 +23,7 @@
 |Selection Sort|O(n<sup>2</sup>)|O(n<sup>2</sup>)|O(n<sup>2</sup>)|O(1)|
 |Insertion Sort|O(n<sup>2</sup>)|O(n<sup>2</sup>)|O(n)|O(1)|
 |Merge Sort|O(nlog(n))|O(nlog(n))|O(nlog(n))|O(n)|
+|Quick Sort|O(nlog(n))|O(n<sup>2</sup>)|O(nlog(n))|O(1)|
 
 <p align="center">
   <img src="Tests/sorting/data/benchmark.png" width="800"/>
