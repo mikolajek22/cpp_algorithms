@@ -10,6 +10,7 @@
 #include "sorting/mergeSort.h"
 #include "sorting/selectionSort.h"
 #include "sorting/quickSort.h"
+#include "sorting/heapSort.h"
 
 
 #define RANDOM_SEED 42
@@ -73,6 +74,13 @@ void sortAndMeasure(size_t n, std::ofstream &file)
     stop = std::chrono::high_resolution_clock::now();
     duration = std::chrono::duration_cast<std::chrono::microseconds>(stop - start);
     file << n << ",quick," << duration.count() << "\n";
+
+    vect = vectOrg;
+    start = std::chrono::high_resolution_clock::now();
+    heapSort(vect.begin(), vect.end());
+    stop = std::chrono::high_resolution_clock::now();
+    duration = std::chrono::duration_cast<std::chrono::microseconds>(stop - start);
+    file << n << ",heap," << duration.count() << "\n";
 
     vect = vectOrg;
     start = std::chrono::high_resolution_clock::now();
