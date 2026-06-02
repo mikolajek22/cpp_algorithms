@@ -1,6 +1,6 @@
 # Data Structures, Algorithms & ADT Playbench
 
-Implementation and visualization of sorting algorithms in C++ and Python.
+Implementation and visualization of sorting algorithms in C++ and Python, Sorting Algorithms and Abstract Data Types. Algorithms as c++ templates.
 
 ## Abstract Data Types
 1. Queue
@@ -39,28 +39,25 @@ Implementation and visualization of sorting algorithms in C++ and Python.
 
 1. Get Google Test lib: `sudo apt install libgtest-dev`
 2. Create and go to /build (from main folder):
-
-    `mkdir build`
-
-    `cd build`
+```bash
+    mkdir build
+    cd build
+```
 3. Generate build files: `cmake ..`
 4. Compie: `make`
 5. Available tests:
-
-    `./adt_test`
-
-    `./searching_test` 
-
-    `./sorting_test`
-
+```bash
+    ./adt_test
+    ./searching_test`
+    ./sorting_test
+```
 ### Plots
 1. Venv Build:
-
-    `python -m venv venv`
-
-    `source venv/bin/activate`
-
-    `pip install -r requirements.txt`
+```bash
+    python -m venv venv
+    source venv/bin/activate
+    pip install -r requirements.txt
+```
 2. Navigate to Tests/sorting: `cd Tests/sorting`
 3. Run Python script: `python timeComparement.py`
 4. Plots are in: `Tests/sorting/data`
