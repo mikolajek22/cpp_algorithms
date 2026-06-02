@@ -1,12 +1,13 @@
 # Data Structures, Algorithms & ADT Playbench
 
-## Build Sequence
-
-## Dir Structure
-
-
+Implementation and visualization of sorting algorithms in C++ and Python.
 
 ## Abstract Data Types
+1. Queue
+2. Ring Queue
+3. Stack
+4. Linked List Stack
+5. Binary Tree
 
 ## Searching Algorithms
 
@@ -27,16 +28,40 @@
 |Quick Sort|O(nlog(n))|O(n<sup>2</sup>)|O(nlog(n))|O(log(n))|
 |Heap Sort|O(nlog(n))|O(nlog(n))|O(nlog(n))|O(log(n))|
 
+
 <p align="center">
   <img src="Tests/sorting/data/benchmark.png" width="800"/>
 </p>
 
-before build:
-sudo apt install libgtest-dev
+## Build Sequence
 
-cd build
-cmake ..
-cmake --build .
+### Algorithms and ADT
 
-./stack_test
+1. Get Google Test lib: `sudo apt install libgtest-dev`
+2. Create and go to /build (from main folder):
+
+    `mkdir build`
+
+    `cd build`
+3. Generate build files: `cmake ..`
+4. Compie: `make`
+5. Available tests:
+
+    `./adt_test`
+
+    `./searching_test` 
+
+    `./sorting_test`
+
+### Plots
+1. Venv Build:
+
+    `python -m venv venv`
+
+    `source venv/bin/activate`
+
+    `pip install -r requirements.txt`
+2. Navigate to Tests/sorting: `cd Tests/sorting`
+3. Run Python script: `python timeComparement.py`
+4. Plots are in: `Tests/sorting/data`
 
